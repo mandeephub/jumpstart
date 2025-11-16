@@ -24,14 +24,14 @@ export default function Header() {
         {/* LEFT SIDE: LOGO + MENU */}
         <div className="flex items-center gap-x-12">
           {/* LOGO */}
-          <a href="#" className="-m-1.5 p-1.5">
+          <a href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
             <img alt="" src={logo} className="h-8 w-auto" />
           </a>
 
           {/* MENU NEXT TO LOGO */}
           <PopoverGroup className="hidden lg:flex lg:gap-x-10">
-            <a href="#" className="text-sm font-semibold text-gray-900">
+            <a href="/" className="text-sm font-semibold text-gray-900">
               Home
             </a>
             <a href="#" className="text-sm font-semibold text-gray-900">
@@ -63,7 +63,7 @@ export default function Header() {
         <div className="hidden lg:flex lg:items-center lg:gap-x-6">
           {/* SIGN IN */}
           <a
-            href="#"
+            href="/login"
             className="flex items-center gap-2 text-sm font-semibold text-gray-900"
           >
             <svg
@@ -150,7 +150,7 @@ export default function Header() {
 
               <div className="py-6">
                 <a
-                  href="#"
+                  href="/login"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50"
                 >
                   Log in
