@@ -113,3 +113,14 @@ color: #0F1729;
 }
 
 /* home page */
+
+
+
+/* dashboard page */
+.custom_dropshadow{
+box-shadow: 0px 2px 8px 0px #00000014;
+border: 1px solid #E1E7EF;
+}
+
+
+/* dashboard page  */

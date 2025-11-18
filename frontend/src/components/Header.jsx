@@ -11,6 +11,7 @@ import {
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 import logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -24,22 +25,22 @@ export default function Header() {
         {/* LEFT SIDE: LOGO + MENU */}
         <div className="flex items-center gap-x-12">
           {/* LOGO */}
-          <a href="/" className="-m-1.5 p-1.5">
+          <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
             <img alt="" src={logo} className="h-8 w-auto" />
-          </a>
+          </Link>
 
           {/* MENU NEXT TO LOGO */}
           <PopoverGroup className="hidden lg:flex lg:gap-x-10">
-            <a href="/" className="text-sm font-semibold text-gray-900">
+            <Link to="/" className="text-sm font-semibold text-gray-900">
               Home
-            </a>
-            <a href="#" className="text-sm font-semibold text-gray-900">
+            </Link>
+            <Link to="#" className="text-sm font-semibold text-gray-900">
               Tests
-            </a>
-            <a href="#" className="text-sm font-semibold text-gray-900">
+            </Link>
+            <Link to="/dashboard" className="text-sm font-semibold text-gray-900">
               Dashboard
-            </a>
+            </Link>
             <a href="#" className="text-sm font-semibold text-gray-900">
               Results
             </a>
@@ -134,7 +135,7 @@ export default function Header() {
                 </a>
 
                 <a
-                  href="#"
+                  href="/dashboard"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50"
                 >
                   Dashboard
@@ -149,12 +150,12 @@ export default function Header() {
               </div>
 
               <div className="py-6">
-                <a
-                  href="/login"
+                <Link
+                  to="/login"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50"
                 >
                   Log in
-                </a>
+                </Link>
               </div>
             </div>
           </div>
