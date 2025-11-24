@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   Dialog,
   DialogPanel,
@@ -12,9 +12,13 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { user, logout } = useContext(AuthContext);
+
+  const isLoggedIn = !!user;
 
   return (
     <header className="bg-white">
@@ -25,12 +29,12 @@ export default function Header() {
         {/* LEFT SIDE: LOGO + MENU */}
         <div className="flex items-center gap-x-12">
           {/* LOGO */}
-          <Link href="/" className="-m-1.5 p-1.5">
+          <Link to="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
             <img alt="" src={logo} className="h-8 w-auto" />
           </Link>
 
-          {/* MENU NEXT TO LOGO */}
+          {/* MENU */}
           <PopoverGroup className="hidden lg:flex lg:gap-x-10">
             <Link to="/" className="text-sm font-semibold text-gray-900">
               Home
@@ -59,38 +63,52 @@ export default function Header() {
           </button>
         </div>
 
-        {/* RIGHT SIDE: LOGIN */}
-        {/* RIGHT SIDE: SIGN IN + GET STARTED */}
+        {/* RIGHT SIDE (Desktop) */}
         <div className="hidden lg:flex lg:items-center lg:gap-x-6">
-          {/* SIGN IN */}
-          <a
-            href="/login"
-            className="flex items-center gap-2 text-sm font-semibold text-gray-900"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="h-5 w-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.25a8.25 8.25 0 0 1 15 0"
-              />
-            </svg>
-            Sign In
-          </a>
+          {isLoggedIn ? (
+            <>
+              <span className="text-sm text-gray-700">
+                Hi, <strong>{user?.name}</strong>
+              </span>
 
-          {/* GET STARTED BUTTON */}
-          <a
-            href="#"
-            className="primary-btn rounded-full bg-orange-500 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-600 transition"
-          >
-            Get Started
-          </a>
+              <button
+                onClick={logout}
+                className="rounded-full bg-orange-500 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-600 transition"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="flex items-center gap-2 text-sm font-semibold text-gray-900"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="h-5 w-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.25a8.25 8.25 0 0 1 15 0"
+                  />
+                </svg>
+                Sign In
+              </Link>
+
+              <a
+                href="/signup"
+                className="primary-btn rounded-full bg-orange-500 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-600 transition"
+              >
+                Get Started
+              </a>
+            </>
+          )}
         </div>
       </nav>
 
@@ -150,12 +168,22 @@ export default function Header() {
               </div>
 
               <div className="py-6">
-                <Link
-                  to="/login"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50"
-                >
-                  Log in
-                </Link>
+                {isLoggedIn ? (
+                  <button
+                    onClick={logout}
+                    className="-mx-3 block rounded-full px-3 py-2.5 text-base font-semibold 
+                               bg-orange-500 text-white text-center hover:bg-orange-600 transition"
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <Link
+                    to="/login"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50"
+                  >
+                    Log in
+                  </Link>
+                )}
               </div>
             </div>
           </div>
